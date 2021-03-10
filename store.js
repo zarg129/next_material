@@ -1,38 +1,39 @@
 import { useMemo } from 'react'
 import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 let store
 
 const initialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0,
+  checkinDate: new Date(),
+  checkoutDate: new Date(),
+  address: '',
+  id: '',
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TICK':
+    case 'SET_CHECKIN':
       return {
         ...state,
-        lastUpdate: action.lastUpdate,
-        light: !!action.light,
+        checkinDate: action.checkinDate,
       }
-    case 'INCREMENT':
+    case 'SET_CHECKOUT':
       return {
         ...state,
-        count: state.count + 1,
+        checkoutDate: action.checkoutDate,
       }
-    case 'DECREMENT':
+    case 'SET_ADDRESS':
       return {
         ...state,
-        count: state.count - 1,
+        address: action.address,
       }
-    case 'RESET':
+    case 'SET_PLACE_ID':
       return {
         ...state,
-        count: initialState.count,
+        id: action.id
       }
+    
     default:
       return state
   }
